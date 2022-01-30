@@ -1,6 +1,9 @@
 # News Data SFTP Pipeline
 Serverless Pipeline to load SFTP data to Amazon Redshift
 
+![News Data SFTP Pipeline Architecture](https://user-images.githubusercontent.com/20443780/151702981-521c7e94-47e5-4887-9563-a0259f5ef00a.png)
+
+
 # Prerequisites
 1. Python (on local)
 2. Spark (on local)
