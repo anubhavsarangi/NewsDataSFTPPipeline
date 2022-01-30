@@ -25,4 +25,4 @@ Reference - https://aws.amazon.com/blogs/aws/new-aws-transfer-for-sftp-fully-man
 - Attach a Lambda function to the bucket
 The above python code - "News_Data_SFTP_Pipeline.py" is to be executed on AWS Lambda.
 
-- Build and push docker image to Amazon ECR
+- Create, build and push docker image to Amazon ECR
