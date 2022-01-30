@@ -16,3 +16,13 @@ pip install -r requirements.txt
 py News_Data_SFTP_Pipeline.py
 
 The curated files will be loaded in %CURRENT_DIR%/tmp/curated/
+
+Implementation Plan Backlog:
+- AWS Transfer for SFTP
+Create a SFTP server, set up user accounts, and associate the server with a S3 bucket to sync files. 
+Reference - https://aws.amazon.com/blogs/aws/new-aws-transfer-for-sftp-fully-managed-sftp-service-for-amazon-s3/
+
+- Attach a Lambda function to the bucket
+The above python code - "News_Data_SFTP_Pipeline.py" is to be executed on AWS Lambda.
+
+- Build and push docker image to Amazon ECR
