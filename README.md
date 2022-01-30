@@ -1,4 +1,4 @@
-# NewsDataSFTPPipeline
+# News Data SFTP Pipeline
 Serverless Pipeline to load SFTP data to Amazon Redshift
 
 # Prerequisites
