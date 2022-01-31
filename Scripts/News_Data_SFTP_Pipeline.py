@@ -68,22 +68,28 @@ def transform_data(filename):
     Parameters:
     filename (string): Name of the file
   
-    '''
+    #Read CSV'''
     df = spark.read.option("header", "true")                .option("quote", "\"")                .option("multiline","true")                .csv("./tmp/raw/" + filename, header=True)
     
+    #Set SparkSession time zone as UTC
     spark.conf.set('spark.sql.session.timeZone', 'UTC')
+    
+    #Convert string attributes to timestamp
     df = df.withColumn("STORY_DATE_TIME",df['STORY_DATE_TIME']                       .cast('timestamp'))
-
     df = df.withColumn("TAKE_DATE_TIME",df['TAKE_DATE_TIME']                       .cast('timestamp'))
     
+    #Remove '\n\r' special characters from the text attributes
     df = df.withColumn("ACCUMULATED_STORY_TEXT", regexp_replace(col("ACCUMULATED_STORY_TEXT"), "[\n\r]", " "))
     df = df.withColumn("TAKE_TEXT", regexp_replace(col("TAKE_TEXT"), "[\n\r]", " "))
     
+    #Extract Keywords from the text 
     df = df.withColumn('ACCUMULATED_STORY_TEXT_KEYWORDS', trim(split(df['ACCUMULATED_STORY_TEXT'], 'Keywords:')                   .getItem(1)))
     df = df.withColumn('TAKE_TEXT_KEYWORDS', trim(split(df['TAKE_TEXT'], 'Keywords:')                   .getItem(1)))
     
+    #Reorder columns in the data set
     df = df.select("DATE","TIME","UNIQUE_STORY_INDEX","EVENT_TYPE", "PNAC", "STORY_DATE_TIME", "TAKE_DATE_TIME",                   "HEADLINE_ALERT_TEXT", "ACCUMULATED_STORY_TEXT", "ACCUMULATED_STORY_TEXT_KEYWORDS", "TAKE_TEXT",                   "TAKE_TEXT_KEYWORDS", "PRODUCTS", "RELATED_RICS", "NAMED_ITEMS", "HEADLINE_SUBTYPE", "STORY_TYPE",                   "TABULAR_FLAG", "ATTRIBUTION", "LANGUAGE")
     
+    #Export data set to csv format
     df.toPandas().to_csv("./tmp/curated/" + filename[:-3], quoting=csv.QUOTE_ALL)
 
 #Fetch files from SFTP Server
