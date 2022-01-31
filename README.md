@@ -11,13 +11,14 @@ Serverless Pipeline to load SFTP data to Amazon Redshift
 4. SFTP Credentials (sftp_credentials.yml)
 5. Required Dependencies (requirements.txt)
 
+## Steps to execute the workflow
 Run in CMD
 pip install -r requirements.txt
 py News_Data_SFTP_Pipeline.py
 
 The curated files will be loaded in %CURRENT_DIR%/tmp/curated/
 
-Implementation Plan Backlog:
+## Implementation Plan Backlog:
 - AWS Transfer for SFTP
 Create a SFTP server, set up user accounts, and associate the server with a S3 bucket to sync files. 
 Reference - https://aws.amazon.com/blogs/aws/new-aws-transfer-for-sftp-fully-managed-sftp-service-for-amazon-s3/
@@ -26,3 +27,9 @@ Reference - https://aws.amazon.com/blogs/aws/new-aws-transfer-for-sftp-fully-man
 The above python code - "News_Data_SFTP_Pipeline.py" is to be executed on AWS Lambda.
 
 - Create, build and push docker image to Amazon ECR
+
+- Column enrichments like extracing Page Editor, Reporting by, Editing by, etc. (from "ACCUMULATED_STORY_TEXT" or "TAKE_TEXT" attribute) which would simplify querying and searching through the data.
+
+- Few attributes have records containing articles and tables, these could be stored in document databases.
+
+- The data contains text from multiple languages - Arabic, Spanish, etc.; these could be translated using APIs and standardized to English.
