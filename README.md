@@ -33,3 +33,5 @@ The above python code - "News_Data_SFTP_Pipeline.py" is to be executed on AWS La
 - Few attributes have records containing articles and tables, these could be stored in document databases.
 
 - The data contains text from multiple languages - Arabic, Spanish, etc.; these could be translated using APIs and standardized to English.
+
+- An Airflow DAG script could also be used to schedule the pipeline run on an EC2 instance.
